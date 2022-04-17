@@ -75,9 +75,11 @@
             personasFiltradas() {
                 return this.personas.filter((persona) => {
                     let registroCompleto = `${persona.nombre} ${persona.apellido} ${persona.dni} ${persona.correo}`
+                    let nombre = `${persona.nombre}`
+                    let dni = `${persona.dni}`
                     return registroCompleto.toLowerCase().includes(this.criterioDeBusqueda.toLowerCase()) 
-                    && registroCompleto.toLowerCase().includes(this.filtroNombre) 
-                    && registroCompleto.toLowerCase().includes(this.filtroDNI)
+                    && nombre.toLowerCase().includes(this.filtroNombre) 
+                    && dni.includes(this.filtroDNI)
                 });
             },
             showAlert()
