@@ -14,8 +14,15 @@
 
 
 <div class="container-fluid mt-3" id="app">
-    <input type="text" class="form-control" v-model="criterioDeBusqueda"
-        placeholder="Ingresar un criterio de busqueda...">
+    <input type="text" class="form-control" v-model="criterioDeBusqueda" placeholder="Ingresar un criterio de busqueda...">
+    <br>
+    <input type="text" class="form-control" v-model="filtroNombre" placeholder="Ingresar Nombre">
+    <br>
+    <input type="number" class="form-control" v-model="filtroDNI" placeholder="Ingresar DNI">
+    <br>
+    <div class="alert alert-danger" role="alert" v-if="showAlert">
+            ¡Ingresar minimo 3 caracteres!
+    </div>
     <br>
     <div class="card-deck m-0">
         <div class="row">
@@ -40,6 +47,8 @@
         el: '#app',
         data: {
             criterioDeBusqueda: '',
+            filtroNombre: '',
+            filtroDNI: '',
             //Aquí, en este array es donde tienen que agregar su información
             personas: [
                 {
@@ -49,10 +58,15 @@
                     dni: "20442873"
                 },
                 {
-                    nombre: "...",
-                    apellido: "...",
-                    correo: "...",
-                    dni: "..."
+                    nombre: "Jose",
+                    apellido: "Martinez",
+                    correo: "mjose30@yahoo.com.ar",
+                    dni: "35098574"
+                },                {
+                    nombre: "Lucila",
+                    apellido: "Suares",
+                    correo: "lSuares@hotmail.com.ar",
+                    dni: "40202020"
                 },
             ]
 
@@ -61,14 +75,24 @@
             personasFiltradas() {
                 return this.personas.filter((persona) => {
                     let registroCompleto = `${persona.nombre} ${persona.apellido} ${persona.dni} ${persona.correo}`
-                    return registroCompleto.toLowerCase().includes(this.criterioDeBusqueda.toLowerCase())
+                    return registroCompleto.toLowerCase().includes(this.criterioDeBusqueda.toLowerCase()) 
+                    && registroCompleto.toLowerCase().includes(this.filtroNombre) 
+                    && registroCompleto.toLowerCase().includes(this.filtroDNI)
                 });
+            },
+            showAlert()
+            {
+                const minimo = 3
+                this.criterioDeBusqueda.length < minimo 
+                && this.filtroDNI.length < minimo 
+                && this.filtroNombre.length < minimo ? mostrar = true : mostrar = false
+                return mostrar
             }
         },
         methods: {
             getNombreCompleto(persona) {
                 return `${persona.nombre} ${persona.apellido}`
-            }
+            },
         }
     });
 </script>
