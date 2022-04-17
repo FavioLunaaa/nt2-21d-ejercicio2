@@ -82,10 +82,11 @@
             },
             showAlert()
             {
+                let mostrar = false
                 const minimo = 3
                 this.criterioDeBusqueda.length < minimo 
                 && this.filtroDNI.length < minimo 
-                && this.filtroNombre.length < minimo ? mostrar = true : mostrar = false
+                && this.filtroNombre.length < minimo ? mostrar = true : mostrar 
                 return mostrar
             }
         },
